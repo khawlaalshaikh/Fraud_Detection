@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Detection</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            padding-top: 40px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .fraud {
+            background: #ffdddd;
+            color: #a00;
+        }
+        .safe {
+            background: #ddffdd;
+            color: #080;
+        }
+        .error {
+            background: #ffe0b3;
+            color: #aa5500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Fraud Detection</h2>
+
+    <form action="/predict-form" method="post">
+        <input name="step" placeholder="Step" required>
+        <input name="type" placeholder="Type" required>
+        <input name="amount" placeholder="Amount" required>
+        <input name="oldbalanceOrg" placeholder="Old Balance Origin" required>
+        <input name="newbalanceOrig" placeholder="New Balance Origin" required>
+        <input name="oldbalanceDest" placeholder="Old Balance Destination" required>
+        <input name="newbalanceDest" placeholder="New Balance Destination" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction is not none %}
+        <div class="result {{ 'fraud' if prediction == 1 else 'safe' }}">
+            <strong>Prediction:</strong>
+            {{ 'Fraud 🚨' if prediction == 1 else 'Legit ✅' }}<br>
+            <strong>Probability:</strong> {{ probability }}
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="result error">
+            Error: {{ error }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
