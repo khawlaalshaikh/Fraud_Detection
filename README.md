@@ -1,0 +1,2 @@
+# Fraud_Detection
+Under 350 characters:  **A reliable and reproducible fraud detection system built for real-world use. Featuring robust machine learning models, a user-friendly Streamlit dashboard, and a powerful REST API, it enables accurate fraud detection, seamless integration, scalability, and an easy experience for both developers and analysts.**
